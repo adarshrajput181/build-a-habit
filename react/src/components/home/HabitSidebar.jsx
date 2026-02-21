@@ -13,6 +13,11 @@ function CloseButton({ close }) {
 }
 
 export function HabitSidebar({ instance, open, close }) {
+	const handleClose = () => {
+		const RIPPLE_EFFECT_LENGTH = 150;
+		setTimeout(close, RIPPLE_EFFECT_LENGTH);
+	};
+
 	if (open)
 		return (
 			<div className="sidebar sidebar-right">
@@ -30,13 +35,13 @@ export function HabitSidebar({ instance, open, close }) {
 							<DeleteButton
 								id={instance.id}
 								isHabit={instance.isHabit}
-								closeSidebar={close}
+								closeSidebar={handleClose}
 							/>
 						</li>
 					</RippleButton>
 					<RippleButton>
 						<li>
-							<CloseButton close={close} />
+							<CloseButton close={handleClose} />
 						</li>
 					</RippleButton>
 				</ul>
