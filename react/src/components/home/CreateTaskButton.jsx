@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTask } from "../../features/tasks/tasksThunks";
+import { RippleButton } from "./general/RippleButton";
 import SaveIcon from "./../../assets/svgs/content-save.svg?react";
 
 function CreateTaskModal({ isOpen, setOpen, setButtonDisplay }) {
@@ -10,15 +11,17 @@ function CreateTaskModal({ isOpen, setOpen, setButtonDisplay }) {
 
 	if (!isOpen) return null;
 
-	const handleCreation = async function(event) {
+	const handleCreation = async function (event) {
 		event.preventDefault();
 		dispatch(createTask({ taskName, date }));
 		closeModal();
 	};
 
-	const closeModal = function() {
-		setOpen(false);
-		setButtonDisplay(false);
+	const closeModal = function () {
+		setTimeout(() => {
+			setOpen(false);
+			setButtonDisplay(false);
+		}, 150);
 	};
 
 	return (
@@ -47,11 +50,15 @@ function CreateTaskModal({ isOpen, setOpen, setButtonDisplay }) {
 						<span>Schedule on:</span>
 					</label>
 					<div className="btn-grp">
-						<button type="submit">
-							<SaveIcon fill="#04a9f5" />
-							Save
-						</button>
-						<button onClick={closeModal}>Cancel</button>
+						<RippleButton>
+							<button type="submit">
+								<SaveIcon fill="#04a9f5" />
+								Save
+							</button>
+						</RippleButton>
+						<RippleButton>
+							<button onClick={closeModal}>Cancel</button>
+						</RippleButton>
 					</div>
 				</form>
 			</div>

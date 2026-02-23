@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-	createHabit,
-	fetchHabits,
-} from "../../features/habits/habitsThunks.js";
+import { createHabit } from "../../features/habits/habitsThunks.js";
+import { RippleButton } from "./general/RippleButton.jsx";
+
 import SaveIcon from "./../../assets/svgs/content-save.svg?react";
 
 function WeeklyList({ addCurrentDay, removeCurrentDay }) {
@@ -123,8 +122,10 @@ function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
 	};
 
 	const closeModal = function () {
-		setOpen(false);
-		setButtonDisplay(false);
+		setTimeout(() => {
+			setOpen(false);
+			setButtonDisplay(false);
+		}, 150);
 	};
 
 	const addCurrentDay = function (day) {
@@ -177,11 +178,15 @@ function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
 						setTarget={setTarget}
 					/>
 					<div className="btn-grp">
-						<button type="submit">
-							<SaveIcon fill="#04a9f5" />
-							Save
-						</button>
-						<button onClick={closeModal}>Cancel</button>
+						<RippleButton>
+							<button type="submit">
+								<SaveIcon fill="#04a9f5" />
+								Save
+							</button>
+						</RippleButton>
+						<RippleButton>
+							<button onClick={closeModal}>Cancel</button>
+						</RippleButton>
 					</div>
 				</form>
 			</div>

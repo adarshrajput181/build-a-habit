@@ -60,7 +60,7 @@ export function UpdateEstimateButton({ id, isHabit }) {
 	};
 
 	const closeModal = function () {
-		setModalOpen(false);
+		setTimeout(() => setModalOpen(false), 150);
 	};
 
 	let modal = "";
@@ -83,8 +83,12 @@ export function UpdateEstimateButton({ id, isHabit }) {
 							/>
 						</div>
 						<div className="btn-grp">
-							<button type="submit">Update</button>
-							<button onClick={closeModal}>Cancel</button>
+							<RippleButton>
+								<button type="submit">Update</button>
+							</RippleButton>
+							<RippleButton>
+								<button onClick={closeModal}>Cancel</button>
+							</RippleButton>
 						</div>
 					</form>
 				</div>
