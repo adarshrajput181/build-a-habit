@@ -115,7 +115,7 @@ export function Home() {
 						nodeRef={nodeRef}
 						in={visible}
 						unmountOnExit
-						classNames="fade"
+						classNames="tabs-transition"
 						timeout={0}
 						onExited={() => {
 							if (nextTab) {
