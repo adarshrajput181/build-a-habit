@@ -63,6 +63,8 @@
 	border: none;
 	transition: transform 0.25s ease-in-out;
 	line-height: 0;
+	height: 100%;
+	width: 100%;
 }
 
 div.habit.timer-on,

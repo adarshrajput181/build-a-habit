@@ -9,6 +9,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateHabitName } from "../../features/habits/habitsThunks";
 import { updateTaskName } from "../../features/tasks/tasksThunks";
+import { RippleButton } from "./general/RippleButton";
 
 export function Habit({
 	name,
@@ -115,13 +116,19 @@ export function Habit({
 				{prettyPrintDuration(timeEstimate)}
 			</span>
 			<div className="button-hover">
-				<button onClick={handleTimer}>
-					{isTimerRunning ? <Pause fill={fill} /> : <Play fill={fill} />}
-				</button>
-				<button onClick={handleUpdate}>
-					<Checkmark fill={fill} />
-				</button>
-				<button onClick={openSidebar}>{sidebarIcon}</button>
+				<RippleButton>
+					<button onClick={handleTimer}>
+						{isTimerRunning ? <Pause fill={fill} /> : <Play fill={fill} />}
+					</button>
+				</RippleButton>
+				<RippleButton>
+					<button onClick={handleUpdate}>
+						<Checkmark fill={fill} />
+					</button>
+				</RippleButton>
+				<RippleButton>
+					<button onClick={openSidebar}>{sidebarIcon}</button>
+				</RippleButton>
 			</div>
 		</div>
 	);

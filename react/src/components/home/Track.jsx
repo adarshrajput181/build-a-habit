@@ -1,5 +1,6 @@
 import SidebarOpen from "../../assets/svgs/menu-open.svg?react";
 import SidebarClose from "../../assets/svgs/menu-close.svg?react";
+import { RippleButton } from "./general/RippleButton";
 
 function descriptiveName(frequency, frequencyInfo) {
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -43,7 +44,9 @@ export function Track({
 			<p className="entry-frequency">
 				{descriptiveName(frequency, frequencyInfo)}
 			</p>
-			<button onClick={openSidebar}>{sidebarIcon}</button>
+			<RippleButton>
+				<button onClick={openSidebar}>{sidebarIcon}</button>
+			</RippleButton>
 		</div>
 	);
 }

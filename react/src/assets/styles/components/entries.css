@@ -57,6 +57,8 @@
 	transition: transform 0.25s ease-in-out;
 	position: relative;
 	padding: 4px 8px;
+	height: 100%;
+	width: 100%;
 }
 
 .entry button:hover {
