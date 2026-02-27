@@ -53,7 +53,7 @@ export function Home() {
 
 	useEffect(() => {
 		try {
-			const redirectIfNotLoggedIn = async function () {
+			const redirectIfNotLoggedIn = async function() {
 				const response = await userAPI.getUser();
 				if (response.status == 403) {
 					navigate("/login", { replace: true });
@@ -108,7 +108,7 @@ export function Home() {
 					>
 						<DehazeIcon />
 					</button>
-					<Dashboard />
+					<Dashboard currentTab={tab} />
 					<CSSTransition
 						nodeRef={nodeRef}
 						in={visible}

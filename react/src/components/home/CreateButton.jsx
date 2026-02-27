@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { CreateHabitButton } from "./CreateHabitButton";
-import { CreateTaskButton } from "./CreateTaskButton";
+import { CreateHabitModal } from "./CreateHabitModal";
+import { CreateTaskModal } from "./CreateTaskModal";
 import { RippleButton } from "./general/RippleButton";
 import PlusIcon from "../../assets/svgs/plus.svg?react";
 
-export function CreateButton() {
+export function CreateButton({ currentTab }) {
 	const [buttonDisplay, setButtonDisplay] = useState(false);
-	const handleClick = function () {
+	const handleClick = function() {
 		let buttons = document.querySelectorAll(".spawned");
 		buttons.forEach((button) => {
 			button.classList.remove("spawned");
@@ -18,15 +18,16 @@ export function CreateButton() {
 	let addButton = document.querySelector("button.create-habit:last-child");
 	addButton?.classList.remove("pressed");
 
+	const taskTabs = ["Today", "Upcoming Tasks", "Archived Tasks"];
+
 	let buttonDiv = null;
 	if (buttonDisplay) {
 		addButton.classList.add("pressed");
-		buttonDiv = (
-			<>
-				<CreateHabitButton setButtonDisplay={setButtonDisplay} />
-				<CreateTaskButton setButtonDisplay={setButtonDisplay} />
-			</>
-		);
+		if (taskTabs.includes(currentTab)) {
+			buttonDiv = <CreateTaskModal setButtonDisplay={setButtonDisplay} />;
+		} else {
+			buttonDiv = <CreateHabitModal setButtonDisplay={setButtonDisplay} />;
+		}
 	}
 
 	return (

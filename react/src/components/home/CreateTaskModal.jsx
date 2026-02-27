@@ -4,22 +4,21 @@ import { createTask } from "../../features/tasks/tasksThunks";
 import { RippleButton } from "./general/RippleButton";
 import SaveIcon from "./../../assets/svgs/content-save.svg?react";
 
-function CreateTaskModal({ isOpen, setOpen, setButtonDisplay }) {
+export function CreateTaskModal({ setButtonDisplay }) {
 	const [taskName, setTaskName] = useState("");
 	const [date, setDate] = useState("");
 	const dispatch = useDispatch();
 
-	if (!isOpen) return null;
+	if (!setButtonDisplay) return null;
 
-	const handleCreation = async function (event) {
+	const handleCreation = async function(event) {
 		event.preventDefault();
 		dispatch(createTask({ taskName, date }));
 		closeModal();
 	};
 
-	const closeModal = function () {
+	const closeModal = function() {
 		setTimeout(() => {
-			setOpen(false);
 			setButtonDisplay(false);
 		}, 150);
 	};
@@ -63,26 +62,5 @@ function CreateTaskModal({ isOpen, setOpen, setButtonDisplay }) {
 				</form>
 			</div>
 		</div>
-	);
-}
-
-export function CreateTaskButton({ setButtonDisplay }) {
-	const [modalOpen, setModalOpen] = useState(false);
-
-	function handleClick() {
-		setModalOpen(true);
-	}
-
-	return (
-		<>
-			<button className="create-habit spawned" onClick={handleClick}>
-				Task
-			</button>
-			<CreateTaskModal
-				isOpen={modalOpen}
-				setOpen={setModalOpen}
-				setButtonDisplay={setButtonDisplay}
-			/>
-		</>
 	);
 }

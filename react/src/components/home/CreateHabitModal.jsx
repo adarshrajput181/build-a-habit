@@ -75,7 +75,7 @@ function TargetTextBox({ goalType, target, setTarget }) {
 	}
 }
 
-function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
+export function CreateHabitModal({ setButtonDisplay }) {
 	const [habitName, setHabitName] = useState("");
 	const [habitFreq, setHabitFreq] = useState("");
 	const [habitFreqInfo, setHabitFreqInfo] = useState([]);
@@ -100,9 +100,9 @@ function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
 		}
 	}, [habitFreq]);
 
-	if (!isOpen) return null;
+	if (!setButtonDisplay) return null;
 
-	const handleCreation = async function (event) {
+	const handleCreation = async function(event) {
 		event.preventDefault();
 		let frequencyString = "";
 		for (const v of habitFreqInfo) frequencyString += v + ",";
@@ -121,19 +121,18 @@ function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
 		closeModal();
 	};
 
-	const closeModal = function () {
+	const closeModal = function() {
 		setTimeout(() => {
-			setOpen(false);
 			setButtonDisplay(false);
 		}, 150);
 	};
 
-	const addCurrentDay = function (day) {
+	const addCurrentDay = function(day) {
 		habitFreqInfo.add(day);
 		setHabitFreqInfo(new Set(habitFreqInfo));
 	};
 
-	const removeCurrentDay = function (day) {
+	const removeCurrentDay = function(day) {
 		if (habitFreqInfo.has(day)) {
 			habitFreqInfo.delete(day);
 			setHabitFreqInfo(new Set(habitFreqInfo));
@@ -191,28 +190,5 @@ function CreateHabitModal({ isOpen, setOpen, setButtonDisplay }) {
 				</form>
 			</div>
 		</div>
-	);
-}
-
-export function CreateHabitButton({ setButtonDisplay }) {
-	const [modalOpen, setModalOpen] = useState(false);
-
-	function handleClick() {
-		setModalOpen(true);
-	}
-
-	return (
-		<>
-			<button className="create-habit spawned" onClick={handleClick}>
-				<RippleButton>
-					<span>Habit</span>
-				</RippleButton>
-			</button>
-			<CreateHabitModal
-				isOpen={modalOpen}
-				setOpen={setModalOpen}
-				setButtonDisplay={setButtonDisplay}
-			/>
-		</>
 	);
 }

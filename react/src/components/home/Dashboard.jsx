@@ -11,14 +11,14 @@ import { updateEstimate } from "../../features/habits/habitsThunks";
 import { setTaskEstimate } from "../../features/tasks/tasksThunks";
 import { useDispatch } from "react-redux";
 
-function HomeNav({ user, logout }) {
+function HomeNav({ user, logout, currentTab }) {
 	const { timerHabit, timerEstimate } = useContext(TimerContext);
 
 	const dispatch = useDispatch();
 	return (
 		<div className="dashboard">
 			<div className="dashboard-right">
-				<CreateButton />
+				<CreateButton currentTab={currentTab} />
 				<Timer
 					habitName={timerHabit.name}
 					addEstimate={(value) => {
@@ -89,12 +89,12 @@ function AccountModalButton({ username, logout }) {
 	);
 }
 
-export function Dashboard() {
+export function Dashboard({ currentTab }) {
 	const [user, setUser] = useState("");
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const fetchUser = async function () {
+		const fetchUser = async function() {
 			const response = await userAPI.getUser();
 			if (response.ok) {
 				const data = await response.json();
@@ -108,7 +108,7 @@ export function Dashboard() {
 		fetchUser();
 	}, []);
 
-	const logout = async function () {
+	const logout = async function() {
 		const response = await userAPI.logOut();
 		if (!response.ok) {
 			const message = await response.text();
@@ -119,7 +119,7 @@ export function Dashboard() {
 	};
 
 	if (user) {
-		return <HomeNav user={user} logout={logout} />;
+		return <HomeNav user={user} logout={logout} currentTab={currentTab} />;
 	}
 
 	// if not logged in
