@@ -1,7 +1,5 @@
 div.timer {
 	display: flex;
-	bottom: 1rem;
-	left: 50%;
 	align-items: center;
 	gap: 0.8rem;
 	background: var(--habit-bg);

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Dashboard } from "../components/home/Dashboard";
-import { CreateButton } from "../components/home/CreateButton.jsx";
 import { Habits } from "../components/home/HabitsContainer";
 import { Sidebar } from "../components/home/Sidebar.jsx";
 import userAPI from "../api/userAPI.js";
@@ -75,7 +74,6 @@ export function Home() {
 		Today: (
 			<div>
 				<Habits />
-				<CreateButton />
 			</div>
 		),
 		Tracks: <TrackContainer />,

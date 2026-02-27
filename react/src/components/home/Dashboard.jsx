@@ -5,6 +5,7 @@ import Logout from "../../assets/svgs/logout.svg?react";
 import AccountSvg from "../../assets/svgs/account.svg?react";
 import { Timer } from "./Timer";
 import { TimerContext } from "../../contexts/TimerContext";
+import { CreateButton } from "./CreateButton";
 
 import { updateEstimate } from "../../features/habits/habitsThunks";
 import { setTaskEstimate } from "../../features/tasks/tasksThunks";
@@ -17,6 +18,7 @@ function HomeNav({ user, logout }) {
 	return (
 		<div className="dashboard">
 			<div className="dashboard-right">
+				<CreateButton />
 				<Timer
 					habitName={timerHabit.name}
 					addEstimate={(value) => {
@@ -92,7 +94,7 @@ export function Dashboard() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const fetchUser = async function() {
+		const fetchUser = async function () {
 			const response = await userAPI.getUser();
 			if (response.ok) {
 				const data = await response.json();
@@ -106,7 +108,7 @@ export function Dashboard() {
 		fetchUser();
 	}, []);
 
-	const logout = async function() {
+	const logout = async function () {
 		const response = await userAPI.logOut();
 		if (!response.ok) {
 			const message = await response.text();

@@ -1,31 +1,26 @@
 div.create-habit-div {
-	position: absolute;
-	bottom: 10%;
-	right: 10%;
 	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	width: 5rem;
+	flex-direction: row;
 }
 
 button.create-habit {
 	border: none;
-	background: var(--timer-bg);
+	background: inherit;
 	padding: 0.2rem 1rem;
-	box-shadow: 2px 3px 2px 2px rgb(69, 90, 100, 0.08);
 	border-radius: 5px;
 	cursor: pointer;
 	opacity: 0.8;
+	margin-right: 0.5rem;
+	overflow: hidden;
 }
 
 button.create-habit:last-child {
 	display: flex;
 	align-items: center;
-	width: 2.5rem;
-	height: 2.5rem;
-	border-radius: 10px;
+	border-radius: 50%;
 	margin: auto;
-	padding: 0.2rem 0.3rem;
+	padding: 0.1rem;
+	line-height: 0;
 }
 
 button.create-habit.pressed {
@@ -33,10 +28,11 @@ button.create-habit.pressed {
 }
 
 button.create-habit:hover {
-	background-color: var(--hover-add-button-bg);
+	background-color: rgba(0, 0, 0, 0.05);
 }
 
 button.create-habit svg {
+	width: 30px;
 	transition: 0.3s transform;
 }
 

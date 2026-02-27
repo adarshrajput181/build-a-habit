@@ -204,7 +204,9 @@ export function CreateHabitButton({ setButtonDisplay }) {
 	return (
 		<>
 			<button className="create-habit spawned" onClick={handleClick}>
-				Habit
+				<RippleButton>
+					<span>Habit</span>
+				</RippleButton>
 			</button>
 			<CreateHabitModal
 				isOpen={modalOpen}
