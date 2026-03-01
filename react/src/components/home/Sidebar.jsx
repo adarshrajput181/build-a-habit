@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import TodayIcon from "../../assets/svgs/white-balance-sunny.svg?react";
 import TrackIcon from "../../assets/svgs/star-four-points.svg?react";
 import UpcomingIcon from "../../assets/svgs/calendar-start.svg?react";
+import ArchivedIcon from "../../assets/svgs/completed_calendar.svg?react";
 import { RippleButton } from "./general/RippleButton";
 
 function Tab({ name, handleClick }) {
@@ -14,7 +15,7 @@ export function Sidebar({ tab, setTab, sidebarOpen, setSidebarOpen }) {
 		{ name: "Today", icon: <TodayIcon fill={fill} /> },
 		{ name: "Tracks", icon: <TrackIcon fill={fill} /> },
 		{ name: "Upcoming Tasks", icon: <UpcomingIcon fill={fill} /> },
-		{ name: "Archived Tasks", icon: <UpcomingIcon fill={fill} /> },
+		{ name: "Archived Tasks", icon: <ArchivedIcon fill={fill} /> },
 	];
 
 	const sidebarRef = useRef(null);
@@ -57,7 +58,7 @@ export function Sidebar({ tab, setTab, sidebarOpen, setSidebarOpen }) {
 							<RippleButton key={curTab.name}>
 								<li className="selected">
 									<span className="icon">{curTab.icon}</span>
-									<Tab name={curTab.name} handleClick={() => { }} />
+									<Tab name={curTab.name} handleClick={() => {}} />
 								</li>
 							</RippleButton>
 						);
