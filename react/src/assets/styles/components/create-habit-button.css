@@ -32,7 +32,7 @@ button.create-habit:hover {
 }
 
 button.create-habit svg {
-	width: 30px;
+	width: 20px;
 	transition: 0.3s transform;
 }
 

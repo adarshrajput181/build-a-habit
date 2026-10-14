@@ -3,43 +3,44 @@ import { CreateHabitModal } from "./CreateHabitModal";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { RippleButton } from "./general/RippleButton";
 import PlusIcon from "../../assets/svgs/plus.svg?react";
+import { Plus } from "lucide-react";
 
 export function CreateButton({ currentTab }) {
-	const [buttonDisplay, setButtonDisplay] = useState(false);
-	const handleClick = function() {
-		let buttons = document.querySelectorAll(".spawned");
-		buttons.forEach((button) => {
-			button.classList.remove("spawned");
-		});
+  const [buttonDisplay, setButtonDisplay] = useState(false);
+  const handleClick = function() {
+    let buttons = document.querySelectorAll(".spawned");
+    buttons.forEach((button) => {
+      button.classList.remove("spawned");
+    });
 
-		setTimeout(() => setButtonDisplay((value) => !value), 100);
-	};
+    setTimeout(() => setButtonDisplay((value) => !value), 100);
+  };
 
-	let addButton = document.querySelector("button.create-habit:last-child");
-	addButton?.classList.remove("pressed");
+  let addButton = document.querySelector("button.create-habit:last-child");
+  addButton?.classList.remove("pressed");
 
-	const taskTabs = ["Today", "Upcoming Tasks", "Archived Tasks"];
+  const taskTabs = ["Today", "Upcoming Tasks", "Archived Tasks"];
 
-	let buttonDiv = null;
-	if (buttonDisplay) {
-		addButton.classList.add("pressed");
-		if (taskTabs.includes(currentTab)) {
-			buttonDiv = <CreateTaskModal setButtonDisplay={setButtonDisplay} />;
-		} else {
-			buttonDiv = <CreateHabitModal setButtonDisplay={setButtonDisplay} />;
-		}
-	}
+  let buttonDiv = null;
+  if (buttonDisplay) {
+    addButton.classList.add("pressed");
+    if (taskTabs.includes(currentTab)) {
+      buttonDiv = <CreateTaskModal setButtonDisplay={setButtonDisplay} />;
+    } else {
+      buttonDiv = <CreateHabitModal setButtonDisplay={setButtonDisplay} />;
+    }
+  }
 
-	return (
-		<>
-			<div className="create-habit-div">
-				{buttonDiv}
-				<button className="create-habit" onClick={handleClick}>
-					<RippleButton>
-						<PlusIcon />
-					</RippleButton>
-				</button>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div className="create-habit-div">
+        {buttonDiv}
+        <button className="create-habit" onClick={handleClick}>
+          <RippleButton>
+            <Plus />
+          </RippleButton>
+        </button>
+      </div>
+    </>
+  );
 }

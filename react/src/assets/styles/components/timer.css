@@ -3,20 +3,18 @@ div.timer {
 	align-items: center;
 	gap: 0.8rem;
 	background: var(--habit-bg);
-	border: var(--timer-bg) solid 2px;
-	padding: 0 1rem;
-	border-radius: 12px;
+	padding: 1.1rem 0.9rem;
+	border-radius: 32px;
+  box-shadow: 0 2px 6px rgba(236,72,153,.12);
 	height: 1.8rem;
-	padding-right: 0;
 }
 
 div.timer button {
 	border: none;
 	border-radius: 50%;
 	background: var(--timer-bg);
-	width: 1.6rem;
-	height: 1.6rem;
-	transform: scale(1.4);
+	width: 1.8rem;
+	height: 1.8rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -37,7 +35,8 @@ div.timer button.running {
 }
 
 div.timer svg {
-	width: 1rem;
+	width: 1.3rem;
+  fill: #fff;
 }
 
 div.exceeded-area-outer {

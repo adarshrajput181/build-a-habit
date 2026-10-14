@@ -18,7 +18,7 @@
 .dashboard-right {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 1.3rem;
 }
 
 .dashboard .account {
@@ -26,12 +26,18 @@
 }
 
 .dashboard .account svg {
-	width: 1.4rem;
+	width: 1rem;
+  height: min-content;
+  fill: #fff;
+  stroke: #fff;
 }
 
 .account > button {
 	border: none;
-	background-color: inherit;
+	background-color: #334155;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
 	transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -84,10 +90,10 @@ div.account-modal button:hover {
 
 .user-options button {
 	display: flex;
-	justify-content: center;
+	align-items: center;
 	gap: 0.2rem;
 }
 
-div.account-modal button svg {
-	fill: var(--button-fg);
+div.account-modal .user-options button svg {
+	fill: none;
 }

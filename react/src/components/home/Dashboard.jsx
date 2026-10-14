@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import userAPI from "../../api/userAPI.js";
-import Logout from "../../assets/svgs/logout.svg?react";
-import AccountSvg from "../../assets/svgs/account.svg?react";
+import { User, LogOut } from "lucide-react";
 import { Timer } from "./Timer";
 import { TimerContext } from "../../contexts/TimerContext";
 import { CreateButton } from "./CreateButton";
@@ -12,116 +11,116 @@ import { setTaskEstimate } from "../../features/tasks/tasksThunks";
 import { useDispatch } from "react-redux";
 
 function HomeNav({ user, logout, currentTab }) {
-	const { timerHabit, timerEstimate } = useContext(TimerContext);
+  const { timerHabit, timerEstimate } = useContext(TimerContext);
 
-	const dispatch = useDispatch();
-	return (
-		<div className="dashboard">
-			<div className="dashboard-right">
-				<CreateButton currentTab={currentTab} />
-				<Timer
-					habitName={timerHabit.name}
-					addEstimate={(value) => {
-						if (timerHabit.isHabit)
-							dispatch(
-								updateEstimate({
-									id: timerHabit.id,
-									estimate: value + timerEstimate,
-								}),
-							);
-						else
-							dispatch(
-								setTaskEstimate({
-									id: timerHabit.id,
-									estimate: value + timerEstimate,
-								}),
-							);
-					}}
-				/>
-				<nav>
-					<div className="account">
-						<AccountModalButton username={user} logout={logout} />
-					</div>
-				</nav>
-			</div>
-		</div>
-	);
+  const dispatch = useDispatch();
+  return (
+    <div className="dashboard">
+      <div className="dashboard-right">
+        <CreateButton currentTab={currentTab} />
+        <Timer
+          habitName={timerHabit.name}
+          addEstimate={(value) => {
+            if (timerHabit.isHabit)
+              dispatch(
+                updateEstimate({
+                  id: timerHabit.id,
+                  estimate: value + timerEstimate,
+                }),
+              );
+            else
+              dispatch(
+                setTaskEstimate({
+                  id: timerHabit.id,
+                  estimate: value + timerEstimate,
+                }),
+              );
+          }}
+        />
+        <nav>
+          <div className="account">
+            <AccountModalButton username={user} logout={logout} />
+          </div>
+        </nav>
+      </div>
+    </div>
+  );
 }
 
 function LoginNav() {
-	return (
-		<div className="dashboard sign-in">
-			<nav>
-				<Link to="/register">Register</Link>
-				<Link to="/login">Login</Link>
-			</nav>
-		</div>
-	);
+  return (
+    <div className="dashboard sign-in">
+      <nav>
+        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
+      </nav>
+    </div>
+  );
 }
 
 function AccountModal({ username, modalOpen, logout }) {
-	if (modalOpen) {
-		return (
-			<div className="account-modal">
-				<div className="user-div">
-					<span>{username}</span>
-				</div>
-				<div className="user-options">
-					<button onClick={() => logout()}>
-						<Logout /> Logout
-					</button>
-				</div>
-			</div>
-		);
-	}
+  if (modalOpen) {
+    return (
+      <div className="account-modal">
+        <div className="user-div">
+          <span>{username}</span>
+        </div>
+        <div className="user-options">
+          <button onClick={() => logout()}>
+            <LogOut /> Logout
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 function AccountModalButton({ username, logout }) {
-	const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-	return (
-		<>
-			<button onClick={() => setModalOpen((prev) => !prev)}>
-				<AccountSvg />
-			</button>
-			<AccountModal username={username} modalOpen={modalOpen} logout={logout} />
-		</>
-	);
+  return (
+    <>
+      <button onClick={() => setModalOpen((prev) => !prev)}>
+        <User />
+      </button>
+      <AccountModal username={username} modalOpen={modalOpen} logout={logout} />
+    </>
+  );
 }
 
 export function Dashboard({ currentTab }) {
-	const [user, setUser] = useState("");
-	const navigate = useNavigate();
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		const fetchUser = async function() {
-			const response = await userAPI.getUser();
-			if (response.ok) {
-				const data = await response.json();
-				const userData = data.user;
-				setUser(userData);
-			} else {
-				setUser(null);
-			}
-		};
+  useEffect(() => {
+    const fetchUser = async function() {
+      const response = await userAPI.getUser();
+      if (response.ok) {
+        const data = await response.json();
+        const userData = data.user;
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+    };
 
-		fetchUser();
-	}, []);
+    fetchUser();
+  }, []);
 
-	const logout = async function() {
-		const response = await userAPI.logOut();
-		if (!response.ok) {
-			const message = await response.text();
-			console.log(message);
-		} else {
-			navigate("/login");
-		}
-	};
+  const logout = async function() {
+    const response = await userAPI.logOut();
+    if (!response.ok) {
+      const message = await response.text();
+      console.log(message);
+    } else {
+      navigate("/login");
+    }
+  };
 
-	if (user) {
-		return <HomeNav user={user} logout={logout} currentTab={currentTab} />;
-	}
+  if (user) {
+    return <HomeNav user={user} logout={logout} currentTab={currentTab} />;
+  }
 
-	// if not logged in
-	return <LoginNav />;
+  // if not logged in
+  return <LoginNav />;
 }
