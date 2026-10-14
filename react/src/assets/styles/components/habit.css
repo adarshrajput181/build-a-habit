@@ -16,19 +16,19 @@
 .done-habits {
 	padding: 1rem;
 	display: flex;
+  gap: 1px;
 	flex-direction: column;
-	gap: 2px;
 	align-items: center;
 }
 
 .todo-habits .habit:first-child {
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 }
 
 .todo-habits .habit:last-child {
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }
 
 .done-habits h2 {

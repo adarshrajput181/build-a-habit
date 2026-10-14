@@ -1,5 +1,6 @@
 div.today-metrics {
 	gap: 1rem;
+  padding: 1rem 0 0.7rem 0;
 }
 
 div.today-metric {
@@ -7,5 +8,6 @@ div.today-metric {
 }
 
 div.today-metric svg {
-	width: 1.5rem;
+	width: 1.3rem;
+  margin-left: 0.2rem;
 }
