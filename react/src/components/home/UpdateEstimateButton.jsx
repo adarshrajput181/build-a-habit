@@ -3,108 +3,108 @@ import { useDispatch, useSelector } from "react-redux";
 import { RippleButton } from "./general/RippleButton.jsx";
 
 import {
-	updateEstimate,
-	updateTimeSpent,
+  updateEstimate,
+  updateTimeSpent,
 } from "../../features/habits/habitsThunks";
 import { setTaskEstimate, setTaskTime } from "../../features/tasks/tasksThunks";
 
 import { Dial } from "./Dial.jsx";
-import StopwatchIcon from "../../assets/svgs/timer.svg?react";
+import { Timer } from "lucide-react";
 import { createPortal } from "react-dom";
 
 export function UpdateEstimateButton({ id, isHabit }) {
-	const [modalOpen, setModalOpen] = useState(false);
-	const [estimate, setEstimate] = useState(0);
-	const [timeSpent, setTimeSpent] = useState(0);
-	const dispatch = useDispatch();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [estimate, setEstimate] = useState(0);
+  const [timeSpent, setTimeSpent] = useState(0);
+  const dispatch = useDispatch();
 
-	const initialEstimate = useSelector((state) =>
-		isHabit
-			? state.habits.byId[id]?.timeEstimate
-			: state.tasks.byId[id]?.timeEstimate,
-	);
+  const initialEstimate = useSelector((state) =>
+    isHabit
+      ? state.habits.byId[id]?.timeEstimate
+      : state.tasks.byId[id]?.timeEstimate,
+  );
 
-	const initialTimeSpent = useSelector((state) =>
-		isHabit
-			? state.habits.byId[id]?.workDuration
-			: state.tasks.byId[id]?.workDuration,
-	);
+  const initialTimeSpent = useSelector((state) =>
+    isHabit
+      ? state.habits.byId[id]?.workDuration
+      : state.tasks.byId[id]?.workDuration,
+  );
 
-	useEffect(() => {
-		setEstimate(initialEstimate);
-		setTimeSpent(initialTimeSpent);
-	}, []);
+  useEffect(() => {
+    setEstimate(initialEstimate);
+    setTimeSpent(initialTimeSpent);
+  }, []);
 
-	const handleUpdate = function (event) {
-		event.preventDefault();
-		if (isHabit) {
-			if (initialEstimate != estimate) {
-				dispatch(updateEstimate({ id, estimate }));
-			}
-			if (initialTimeSpent != timeSpent) {
-				dispatch(updateTimeSpent({ id, timeSpent }));
-			}
-		} else {
-			if (initialEstimate != estimate)
-				dispatch(setTaskEstimate({ id, estimate }));
-			if (initialTimeSpent != timeSpent)
-				dispatch(setTaskTime({ id, timeSpent }));
-		}
+  const handleUpdate = function(event) {
+    event.preventDefault();
+    if (isHabit) {
+      if (initialEstimate != estimate) {
+        dispatch(updateEstimate({ id, estimate }));
+      }
+      if (initialTimeSpent != timeSpent) {
+        dispatch(updateTimeSpent({ id, timeSpent }));
+      }
+    } else {
+      if (initialEstimate != estimate)
+        dispatch(setTaskEstimate({ id, estimate }));
+      if (initialTimeSpent != timeSpent)
+        dispatch(setTaskTime({ id, timeSpent }));
+    }
 
-		closeModal();
-	};
+    closeModal();
+  };
 
-	const openModal = function () {
-		const RIPPLE_EFFECT_LENGTH = 150;
-		setTimeout(() => setModalOpen(true), RIPPLE_EFFECT_LENGTH);
-	};
+  const openModal = function() {
+    const RIPPLE_EFFECT_LENGTH = 150;
+    setTimeout(() => setModalOpen(true), RIPPLE_EFFECT_LENGTH);
+  };
 
-	const closeModal = function () {
-		setTimeout(() => setModalOpen(false), 150);
-	};
+  const closeModal = function() {
+    setTimeout(() => setModalOpen(false), 150);
+  };
 
-	let modal = "";
-	if (modalOpen) {
-		const modalDiv = (
-			<div className="habit-overlay" onClick={closeModal}>
-				<div className="main-habit-form" onClick={(e) => e.stopPropagation()}>
-					<h3>Duration</h3>
-					<form onSubmit={handleUpdate}>
-						<div className="justify-center gap-15">
-							<Dial
-								initial={initialEstimate}
-								onChange={setEstimate}
-								label={"Estimate"}
-							/>
-							<Dial
-								initial={initialTimeSpent}
-								onChange={setTimeSpent}
-								label={"Time Spent"}
-							/>
-						</div>
-						<div className="btn-grp">
-							<RippleButton>
-								<button type="submit">Update</button>
-							</RippleButton>
-							<RippleButton>
-								<button onClick={closeModal}>Cancel</button>
-							</RippleButton>
-						</div>
-					</form>
-				</div>
-			</div>
-		);
+  let modal = "";
+  if (modalOpen) {
+    const modalDiv = (
+      <div className="habit-overlay" onClick={closeModal}>
+        <div className="main-habit-form" onClick={(e) => e.stopPropagation()}>
+          <h3>Duration</h3>
+          <form onSubmit={handleUpdate}>
+            <div className="justify-center gap-15">
+              <Dial
+                initial={initialEstimate}
+                onChange={setEstimate}
+                label={"Estimate"}
+              />
+              <Dial
+                initial={initialTimeSpent}
+                onChange={setTimeSpent}
+                label={"Time Spent"}
+              />
+            </div>
+            <div className="btn-grp">
+              <RippleButton>
+                <button type="submit">Update</button>
+              </RippleButton>
+              <RippleButton>
+                <button onClick={closeModal}>Cancel</button>
+              </RippleButton>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
 
-		modal = createPortal(modalDiv, document.getElementById("modal-root"));
-	}
+    modal = createPortal(modalDiv, document.getElementById("modal-root"));
+  }
 
-	return (
-		<>
-			{modal}
-			<button onClick={openModal}>
-				<StopwatchIcon />
-				<span>Time Tracking</span>
-			</button>
-		</>
-	);
+  return (
+    <>
+      {modal}
+      <button onClick={openModal}>
+        <Timer />
+        <span>Time Tracking</span>
+      </button>
+    </>
+  );
 }

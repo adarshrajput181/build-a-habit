@@ -52,6 +52,8 @@
 		outline 0.1s cubic-bezier(0.9, 0.38, 0.4, 1.1),
 		box-shadow 0.1s ease-in-out;
 	overflow: auto;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
 }
 
 .habit-name {
@@ -70,16 +72,11 @@
 div.habit.timer-on,
 div.habit.timer-on.focused {
 	outline: 2px solid var(--timer-bg);
-	/* box-shadow: 0 0 4px 0 hsl(0 0 0%); */
-	box-shadow:
-		0 1px 8px #0003,
-		0 3px 4px #00000024,
-		0 3px 3px -2px #0000001f;
 }
 
 div.svg-icon {
 	width: 28px;
-	height: 28px;
+  margin-left: 0.5rem;
 	line-height: 0;
 }
 
@@ -107,19 +104,19 @@ button.danger {
 }
 
 div.habit.focused {
-	outline: 1px solid var(--focus-blue);
-	box-shadow: 0 0 3px 0 var(--focus-blue);
+	outline-color: var(--focus-blue);
 }
 
 div.button-hover {
 	display: flex;
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 1rem;
+	top: 2px;
+	bottom: 2px;
+	right: 2px;
 	background-color: inherit;
 	opacity: 0;
 	border-left: 2px solid #dfdfdf;
+  border-radius: 0 14px 14px 0;
 }
 
 div.habit:hover div.button-hover {

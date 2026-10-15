@@ -90,6 +90,7 @@
 
 .habit-overlay button svg {
 	width: 0.9rem;
+  height: min-content;
 }
 
 /* .habit-overlay form button:hover { */

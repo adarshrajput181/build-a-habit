@@ -1,52 +1,52 @@
 import { DeleteButton } from "./DeleteButton.jsx";
 import { UpdateEstimateButton } from "./UpdateEstimateButton.jsx";
-import CloseIcon from "../../assets/svgs/close.svg?react";
+import { X } from "lucide-react";
 import { RippleButton } from "./general/RippleButton.jsx";
 
 function CloseButton({ close }) {
-	return (
-		<button onClick={close}>
-			<CloseIcon />
-			Close
-		</button>
-	);
+  return (
+    <button onClick={close}>
+      <X />
+      Close
+    </button>
+  );
 }
 
 export function HabitSidebar({ instance, open, close }) {
-	const handleClose = () => {
-		const RIPPLE_EFFECT_LENGTH = 150;
-		setTimeout(close, RIPPLE_EFFECT_LENGTH);
-	};
+  const handleClose = () => {
+    const RIPPLE_EFFECT_LENGTH = 150;
+    setTimeout(close, RIPPLE_EFFECT_LENGTH);
+  };
 
-	if (open)
-		return (
-			<div className="sidebar sidebar-right">
-				<ul>
-					<RippleButton>
-						<li>
-							<UpdateEstimateButton
-								id={instance.id}
-								isHabit={instance.isHabit}
-							/>
-						</li>
-					</RippleButton>
-					<RippleButton>
-						<li>
-							<DeleteButton
-								id={instance.id}
-								isHabit={instance.isHabit}
-								closeSidebar={handleClose}
-							/>
-						</li>
-					</RippleButton>
-					<RippleButton>
-						<li>
-							<CloseButton close={handleClose} />
-						</li>
-					</RippleButton>
-				</ul>
-			</div>
-		);
+  if (open)
+    return (
+      <div className="sidebar sidebar-right">
+        <ul>
+          <RippleButton>
+            <li>
+              <UpdateEstimateButton
+                id={instance.id}
+                isHabit={instance.isHabit}
+              />
+            </li>
+          </RippleButton>
+          <RippleButton>
+            <li>
+              <DeleteButton
+                id={instance.id}
+                isHabit={instance.isHabit}
+                closeSidebar={handleClose}
+              />
+            </li>
+          </RippleButton>
+          <RippleButton>
+            <li>
+              <CloseButton close={handleClose} />
+            </li>
+          </RippleButton>
+        </ul>
+      </div>
+    );
 
-	return;
+  return;
 }
