@@ -4,7 +4,7 @@ export function Header() {
   return (
     <>
       <header>
-        <div className="nav-inner justify-space-between">
+        <div className="nav-inner wrap justify-space-between">
           <div className="nav-left">
             <span className="logo">Build<span className="pink">·</span>a<span className="pink">·</span>Habit</span>
           </div>
