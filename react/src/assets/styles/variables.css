@@ -19,4 +19,7 @@
 	--focus-blue: hsl(199 97% 49%);
 	--focus-hover-blue: hsl(199 97% calc(49% - 5%));
 	--button-fg: hsl(0 0 100%);
+
+  --pink: #EC4899;
+  --pink-600: #DB2777;
 }

@@ -1,0 +1,46 @@
+header {
+  background: white;
+}
+
+.nav-inner {
+  width: 100%;
+  height: 68px;
+  max-width: 1208px;
+  padding: 0 24px;
+  margin-inline: auto;
+  align-items: center;
+  line-height: 1.6;
+}
+
+.nav-left {
+  font-weight: 700;
+  font-size: 16.5px;
+  letter-spacing: -.02em;
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-right a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-right button {
+  background-color: var(--pink);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-weight: 600;
+  padding: 9px 18px;
+}
+
+.nav-right svg {
+  width: 16px;
+}

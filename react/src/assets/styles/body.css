@@ -9,7 +9,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Inter", "Open Sans", sans-serif;
 	font-size: 0.875rem;
 	background-color: var(--body-bg);
 }
@@ -39,4 +39,8 @@ button {
 button.svg-icon {
 	background: inherit;
 	border: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
 }

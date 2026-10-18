@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCompletedTasks } from "../../features/tasks/tasksSelectors";
 import { selectCompletedHabits } from "../../features/habits/habitsSelectors";
 import { Habit } from "./Habit";
-import ChevronUp from "lucide-react";
-import ChevronDown from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 export function DoneContainer({
   updateValue,

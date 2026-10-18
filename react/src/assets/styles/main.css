@@ -3,6 +3,7 @@
 
 @import "./home.css";
 @import "./login.css";
+@import "./landing.css";
 @import "./components/dashboard.css";
 @import "./components/navbar.css";
 @import "./components/sidebar.css";
