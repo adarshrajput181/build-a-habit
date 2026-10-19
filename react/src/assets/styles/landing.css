@@ -35,6 +35,11 @@ header {
   text-decoration: none;
 }
 
+.nav-right a:hover {
+  color: var(--pink);
+  fill: var(--pink);
+}
+
 .sign-up {
   background-color: var(--pink);
   color: white;
@@ -42,6 +47,12 @@ header {
   border-radius: 100px;
   font-weight: 600;
   padding: 9px 18px;
+}
+
+.sign-up:hover {
+  background-color: var(--pink-600);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px -12px rgba(236, 72, 153, .45);
 }
 
 .nav-right svg {
@@ -116,6 +127,12 @@ div.cta button {
 
 div.cta button.gh {
   background: white;
+  border: 1px solid transparent;
+}
+
+div.cta button.gh:hover {
+  border-color: #64748B;
+  transform: translateY(-1px);
 }
 
 div.cta button svg {
