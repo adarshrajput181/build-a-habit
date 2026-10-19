@@ -23,7 +23,7 @@ header {
 
 .nav-right {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .nav-right a {
@@ -120,4 +120,163 @@ div.cta button.gh {
 
 div.cta button svg {
   width: 16px;
+}
+
+div.mock-frame {
+	background: linear-gradient(180deg, #FCE7F3 0%, #F6E4F4 40%, #F4E8FA 75%, #FFFFFF 100%);
+  margin-top: 60px;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(15, 23, 42, .04), 0 40px 80px -30px rgba(15, 23, 42, .22);
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: 196px 1fr;
+  overflow: clip;
+}
+
+div.mock-navbar {
+  background-color: var(--navbar-bg);
+}
+
+div.mock-main {
+	padding: 20px 26px 26px;
+}
+
+div.mock-dashboard-right {
+  gap: 20px;
+}
+
+div.mock-timer {
+  background-color: white;
+  padding: 3px 14px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--pink-200);
+  border-radius: 100px;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(236,72,153,.12);
+  font-size: 12.5px;
+}
+
+div.mock-play {
+  background-color: var(--pink);
+  border-radius: 50%;
+  padding: 7px;
+}
+
+div.mock-play svg {
+  fill: white;
+  stroke: none;
+  width: 15px;
+  height: 15px;
+}
+
+div.mock-user {
+  background-color: #334155;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+div.mock-user svg {
+  fill: white;
+  stroke: white;
+  width: 14px;
+  height: 14px;
+}
+
+div.mock-metrics {
+  margin-top: 20px;
+  color: var(--text-secondary);
+  gap: 28px;
+  font-size: 13px; 
+}
+
+div.mock-metrics span {
+  gap: 8px;
+}
+
+div.mock-metrics svg {
+  width: 14px;
+  height: 14px;
+}
+
+div.mock-habits {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+div.mock-habit {
+  background-color: white;
+  padding: 15px 20px;
+}
+
+div.mock-habit:first-child {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+div.mock-habit:last-child {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+span.mock-times {
+  color: var(--text-muted);
+  font-family: "JetBrains Mono", "Roboto Mono", "Cascadia Code", mono;
+  font-size: 12px;
+}
+
+div.mock-navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 30px 20px;
+  gap: 5px;
+}
+
+div.mock-navbar span {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+}
+
+div.mock-navbar span:first-child {
+  color: var(--focus-blue);
+  position: relative;
+}
+
+div.mock-navbar span:first-child svg{
+  fill: var(--pink);
+  stroke: var(--pink);
+}
+
+div.mock-navbar span:first-child::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -20px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background-color: var(--focus-blue);
+}
+
+div.mock-navbar span svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-secondary);
+}
+
+@media (max-width: 980px) {
+  div.mock-navbar {
+    display: none;
+  }
+
+  div.mock-frame {
+    grid-template-columns: 1fr;
+  }
 }
