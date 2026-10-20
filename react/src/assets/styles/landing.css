@@ -1,5 +1,7 @@
 header {
   background: white;
+  position: fixed;
+  width: 100%;
 }
 
 .nav-inner {
@@ -64,6 +66,7 @@ section.hero {
   padding: clamp(48px, 6vw, 80px) 0 clamp(64px, 8vw, 110px) 0;
   text-align: center;
   margin-inline: auto;
+  min-height: calc(100vh - 136px);
 }
 
 .hero .wrap > span {
@@ -296,4 +299,22 @@ div.mock-navbar span svg {
   div.mock-frame {
     grid-template-columns: 1fr;
   }
+}
+
+footer { 
+  background-color: white;
+  padding: 34px 20px;
+}
+
+.landing-info {
+  display: flex;
+  justify-content: flex-end;;
+  align-items: center;
+}
+
+.landing-info span {
+  display: flex;
+  gap: 10px;
+  color: var(--text-muted);
+  font-family: "JetBrains Mono", "Roboto Mono", "Cascadia Code", mono;
 }

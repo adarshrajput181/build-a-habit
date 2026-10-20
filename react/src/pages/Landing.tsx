@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import userAPI from "../api/userAPI";
+
 import { HeroSection } from "../components/landing/HeroSection";
 import { Header } from "../components/landing/Header";
-import userAPI from "../api/userAPI";
+import { Footer } from "../components/landing/Footer";
 
 export function Landing() {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ export function Landing() {
     <>
       <Header />
       <HeroSection />
+      <Footer />
     </>
   );
 }
