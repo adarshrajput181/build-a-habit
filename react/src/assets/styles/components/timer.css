@@ -118,7 +118,7 @@ div.exceeded-area-inner span {
 
 .gauge div.sub {
 	font-size: 1rem;
-	font-family: 500;
+	font-weight: 500;
 	color: gray;
 	font-family:
 		system-ui,

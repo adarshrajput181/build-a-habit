@@ -1,4 +1,4 @@
-import GithubIcon from "../../assets/svgs/github.svg?react";
+import GitHubIcon from "../../assets/svgs/github.svg?react";
 
 export function Header() {
   return (
@@ -10,8 +10,8 @@ export function Header() {
           </div>
           <div className="nav-right">
             <a href="https://github.com/adarshrajput181/build-a-habit">
-              <GithubIcon />
-              Github
+              <GitHubIcon />
+              GitHub
             </a>
             <button type="button" className="sign-up">
               Sign Up
