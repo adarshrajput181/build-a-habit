@@ -1,6 +1,6 @@
 import GitHubIcon from "../../assets/svgs/github.svg?react";
 
-export function Header() {
+export function Header({ openModal }: { openModal: () => void }) {
   return (
     <>
       <header>
@@ -13,7 +13,7 @@ export function Header() {
               <GitHubIcon />
               GitHub
             </a>
-            <button type="button" className="sign-up">
+            <button type="button" className="sign-up" onClick={openModal}>
               Sign Up
             </button>
           </div>

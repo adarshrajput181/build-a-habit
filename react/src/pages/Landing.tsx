@@ -1,14 +1,16 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import userAPI from "../api/userAPI";
 
 import { Header } from "../components/landing/Header";
 import { HeroSection } from "../components/landing/HeroSection";
 import { SessionSection } from "../components/landing/SessionSection";
 import { Footer } from "../components/landing/Footer";
+import { SignUpModal } from "../components/landing/SignUpModal";
 
 export function Landing() {
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -27,12 +29,13 @@ export function Landing() {
 
   return (
     <>
-      <Header />
+      <Header openModal={() => setModalOpen(true)} />
       <main className="landing">
-        <HeroSection />
+        <HeroSection openModal={() => setModalOpen(true)} />
         <SessionSection />
       </main>
       <Footer />
+      {modalOpen && <SignUpModal onClose={() => setModalOpen(false)} />}
     </>
   );
 }

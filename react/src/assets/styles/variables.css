@@ -27,4 +27,11 @@
   --text-primary: #0F172A;
   --text-secondary: #334155;
   --text-muted: #94A3B8;
+
+  --success: #059669;
+  --success-bg: #ECFDF5;
+  --success-border: #A7F3D0;
+  --error: #DC2626;
+  --error-bg: #FEF2F2;
+  --error-border: #FECACA;
 }

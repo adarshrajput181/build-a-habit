@@ -113,7 +113,7 @@ export function Dashboard({ currentTab }) {
       const message = await response.text();
       console.log(message);
     } else {
-      navigate("/login");
+      navigate("/");
     }
   };
 

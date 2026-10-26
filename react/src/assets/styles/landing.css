@@ -385,3 +385,125 @@ div.mock-focus {
   justify-content: center;
   margin-top: 10px;
 }
+
+div.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+div.login-modal {
+  background: white;
+  border-radius: 18px;
+  padding: 36px 32px 32px;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-modal h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.login-modal p {
+  color: #64748B;
+  margin-top: 10px;
+  margin-bottom: 28px;
+}
+
+.login-modal label {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  font-size: 13px;
+  font-weight: 500;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.login-modal input::placeholder {
+  color: #94A3B8;
+}
+
+.login-modal input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+}
+
+.login-modal form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28px;
+}
+
+.login-modal button {
+  margin-top: 10px;
+  background: var(--pink);
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+.login-modal button.close-modal {
+  background: #F5F6F7;
+  color: #94A388;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+button.close-modal svg {
+  width: 16px;
+  height: 16px;
+}
+
+button.login-link {
+  border: none;
+  background-color: inherit;
+  color: var(--focus-blue);
+  font-weight: 500;
+  padding: 0;
+}
+
+button.login-link:hover {
+  text-decoration: underline;
+}
+
+div.login-response {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+div.login-response.success {
+  color: var(--success);
+  background-color: var(--success-bg);
+  border: 1px solid var(--success-border);
+}
+
+div.login-response.error {
+  color: var(--error);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+}

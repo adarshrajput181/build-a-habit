@@ -1,7 +1,7 @@
 import { MockSection } from "./MockSection";
 import GithubIcon from "../../assets/svgs/github.svg?react";
 
-export function HeroSection() {
+export function HeroSection({ openModal }: { openModal: () => void }) {
   return (
     <section className="hero">
       <div className="wrap">
@@ -16,7 +16,7 @@ export function HeroSection() {
           Build-a-Habit is a small, focused habit tracker for people who care about where their hours go. Sign up on the official instance, or run your own.
         </p>
         <div className="cta justify-center">
-          <button type="button" className="sign-up">Sign Up</button>
+          <button type="button" className="sign-up" onClick={openModal} >Sign Up</button>
           <button type="button" className="gh"><GithubIcon />View Source</button>
         </div>
         <MockSection />
