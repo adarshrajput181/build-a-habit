@@ -9,7 +9,11 @@ export function Header({ openModal }: { openModal: () => void }) {
             <span className="logo">Build<span className="pink">·</span>a<span className="pink">·</span>Habit</span>
           </div>
           <div className="nav-right">
-            <a href="https://github.com/adarshrajput181/build-a-habit">
+            <a
+              href="https://github.com/adarshrajput181/build-a-habit"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <GitHubIcon />
               GitHub
             </a>

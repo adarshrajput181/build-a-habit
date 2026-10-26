@@ -17,7 +17,15 @@ export function HeroSection({ openModal }: { openModal: () => void }) {
         </p>
         <div className="cta justify-center">
           <button type="button" className="sign-up" onClick={openModal} >Sign Up</button>
-          <button type="button" className="gh"><GithubIcon />View Source</button>
+          <a
+            href="https://github.com/adarshrajput181/build-a-habit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button-gh"
+          >
+            <GithubIcon />
+            View source
+          </a>
         </div>
         <MockSection />
       </div>

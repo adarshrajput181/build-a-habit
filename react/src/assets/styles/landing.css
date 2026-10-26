@@ -132,17 +132,29 @@ div.cta button {
   line-height: 1.6;
 }
 
-div.cta button.gh {
+div.cta .button-gh {
   background: white;
   border: 1px solid transparent;
+  display: flex;
+  gap: 10px;
+  padding: 15px 30px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.6;
+  text-decoration: none;
 }
 
-div.cta button.gh:hover {
+div.cta .button-gh:hover {
   border-color: #64748B;
   transform: translateY(-1px);
 }
 
-div.cta button svg {
+div.cta .button-gh:visited {
+  color: inherit;
+}
+
+div.cta .button-gh svg {
   width: 16px;
 }
 
