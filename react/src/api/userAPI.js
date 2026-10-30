@@ -27,7 +27,7 @@ async function logIn(username, password) {
 
 async function logOut() {
   const path = "/api/logout";
-  const response = await fetch(path, { credentials: "include" });
+  const response = await fetch(path, { method: "POST", credentials: "include" });
   return response;
 }
 

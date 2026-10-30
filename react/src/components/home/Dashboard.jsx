@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import userAPI from "../../api/userAPI.js";
 import { User, LogOut } from "lucide-react";
 import { Timer } from "./Timer";
@@ -43,17 +43,6 @@ function HomeNav({ user, logout, currentTab }) {
           </div>
         </nav>
       </div>
-    </div>
-  );
-}
-
-function LoginNav() {
-  return (
-    <div className="dashboard sign-in">
-      <nav>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Login</Link>
-      </nav>
     </div>
   );
 }
@@ -117,10 +106,5 @@ export function Dashboard({ currentTab }) {
     }
   };
 
-  if (user) {
-    return <HomeNav user={user} logout={logout} currentTab={currentTab} />;
-  }
-
-  // if not logged in
-  return <LoginNav />;
+  return <HomeNav user={user} logout={logout} currentTab={currentTab} />;
 }

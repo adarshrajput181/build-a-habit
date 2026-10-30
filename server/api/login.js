@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../models/usersModel.js");
 const generateInstances = require("../utils/generateInstances.js");
-const generateDayString = require("../utils/generateDayString.js");
 const jwt = require("jsonwebtoken");
 
 router.post("/login", async (req, res) => {
@@ -24,15 +23,10 @@ router.post("/login", async (req, res) => {
 
     const currentDay = new Date();
     currentDay.setHours(0, 0, 0, 0);
-    req.session.user = {
-      id: storedUser._id,
-      lastAccess: generateDayString(currentDay),
-    };
 
     // make a jwt token for this sign up
-    const dayString = generateDayString(currentDay);
     const token = jwt.sign(
-      { id: storedUser._id, lastAccess: dayString },
+      { id: storedUser._id },
       process.env.JWT_SECRET,
       { expiresIn: "8h" },
     );
@@ -47,8 +41,11 @@ router.post("/login", async (req, res) => {
       path: "/"
     });
 
+    const todayString = currentDay.toISOString().split('T')[0];
+    const lastLoginString = storedUser.lastLogin.toISOString().split('T')[0];
+
     // logging in for the first time today
-    if (storedUser.lastLogin.getTime() !== currentDay.getTime()) {
+    if (todayString !== lastLoginString) {
       storedUser.lastLogin = currentDay;
       storedUser.todayDuration = 0;
       await storedUser.save();

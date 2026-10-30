@@ -2,145 +2,146 @@ const express = require("express");
 const router = express.Router();
 
 const generateInstances = require("../utils/generateInstances.js");
-const generateDayString = require("../utils/generateDayString.js");
 const verifyToken = require("../utils/verifyToken.js");
 const Instance = require("../models/habitInstanceModel.js");
 const User = require("../models/usersModel.js");
 
 router.get("/habitsInstances", verifyToken, async (req, res) => {
-	try {
-		const userId = req.id;
-		const lastAccess = new Date(req.session.user.lastAccess);
-		lastAccess.setHours(0, 0, 0, 0);
-		const currentDay = new Date();
-		currentDay.setHours(0, 0, 0, 0);
+  try {
+    const userId = req.id;
+    const storedUser = await User.findById(userId).exec();
+    const lastAccess = new Date(storedUser.lastLogin);
+    const currentDay = new Date();
 
-		// if the user is already logged in and its a new day
-		if (lastAccess.getTime() !== currentDay.getTime()) {
-			req.session.user.lastAccess = generateDayString(currentDay);
-			await generateInstances(userId);
-		}
+    const todayString = currentDay.toISOString().split('T')[0];
+    const lastLoginString = lastAccess.toISOString().split('T')[0];
 
-		const habitInstances = await Instance.find({
-			userId,
-			date: currentDay,
-		}).exec();
+    // if the user is already logged in and its a new day
+    if (todayString !== lastLoginString) {
+      storedUser.lastLogin = new Date();
+      await generateInstances(userId);
+    }
 
-		res.json({ habits: habitInstances });
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+    const habitInstances = await Instance.find({
+      userId,
+      date: currentDay,
+    }).exec();
+
+    res.json({ habits: habitInstances });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.patch("/habit/completed/:id", verifyToken, async (req, res) => {
-	try {
-		const habitInstance = await Instance.findById(req.params.id).exec();
+  try {
+    const habitInstance = await Instance.findById(req.params.id).exec();
 
-		if (habitInstance.goalType === "yes/no") {
-			habitInstance.status =
-				habitInstance.status === "Completed" ? "Not Completed" : "Completed";
-			habitInstance.goalValue = "";
-		} else if (parseInt(habitInstance.goalTarget) > parseInt(req.body.value)) {
-			habitInstance.status = "Not Completed";
-			habitInstance.goalValue = req.body.value;
-		} else {
-			habitInstance.status = "Completed";
-			habitInstance.goalValue = req.body.value;
-		}
+    if (habitInstance.goalType === "yes/no") {
+      habitInstance.status =
+        habitInstance.status === "Completed" ? "Not Completed" : "Completed";
+      habitInstance.goalValue = "";
+    } else if (parseInt(habitInstance.goalTarget) > parseInt(req.body.value)) {
+      habitInstance.status = "Not Completed";
+      habitInstance.goalValue = req.body.value;
+    } else {
+      habitInstance.status = "Completed";
+      habitInstance.goalValue = req.body.value;
+    }
 
-		await habitInstance.save();
-		res.status(200).json(habitInstance);
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+    await habitInstance.save();
+    res.status(200).json(habitInstance);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.patch("/habit/updateName/:id", verifyToken, async (req, res) => {
-	try {
-		const id = req.params.id;
-		const newName = req.body.value;
+  try {
+    const id = req.params.id;
+    const newName = req.body.value;
 
-		const habit = await Instance.findById(id).exec();
-		if (habit) {
-			habit.name = newName;
-			await habit.save();
-			res.status(200).json(habit);
-		} else {
-			res.status(404).json({
-				message: "Not instance found for the given ID",
-			});
-		}
-	} catch (err) {
-		res.status(500).json({
-			message: "Internal Server Error",
-		});
-	}
+    const habit = await Instance.findById(id).exec();
+    if (habit) {
+      habit.name = newName;
+      await habit.save();
+      res.status(200).json(habit);
+    } else {
+      res.status(404).json({
+        message: "Not instance found for the given ID",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 });
 
 router.patch("/habit/addDuration/:id", verifyToken, async (req, res) => {
-	try {
-		const userId = req.id;
-		const habitInstance = await Instance.findById(req.params.id).exec();
-		const user = await User.findById(userId);
-		const value = parseInt(req.body.value);
+  try {
+    const userId = req.id;
+    const habitInstance = await Instance.findById(req.params.id).exec();
+    const user = await User.findById(userId);
+    const value = parseInt(req.body.value);
 
-		habitInstance.workDuration = habitInstance.workDuration + value;
-		await habitInstance.save();
+    habitInstance.workDuration = habitInstance.workDuration + value;
+    await habitInstance.save();
 
-		user.todayDuration = user.todayDuration + value;
-		await user.save();
-		res.json(habitInstance);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+    user.todayDuration = user.todayDuration + value;
+    await user.save();
+    res.json(habitInstance);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.patch("/habit/updateEstimate/:id", verifyToken, async (req, res) => {
-	try {
-		const habitInstance = await Instance.findById(req.params.id).exec();
-		const value = parseInt(req.body.value);
+  try {
+    const habitInstance = await Instance.findById(req.params.id).exec();
+    const value = parseInt(req.body.value);
 
-		habitInstance.timeEstimate = value;
-		await habitInstance.save();
-		res.status(200).json(habitInstance);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+    habitInstance.timeEstimate = value;
+    await habitInstance.save();
+    res.status(200).json(habitInstance);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.patch("/habit/updateTimeSpent/:id", verifyToken, async (req, res) => {
-	try {
-		const habitInstance = await Instance.findById(req.params.id).exec();
-		const value = parseInt(req.body.value);
+  try {
+    const habitInstance = await Instance.findById(req.params.id).exec();
+    const value = parseInt(req.body.value);
 
-		habitInstance.workDuration = value;
-		await habitInstance.save();
-		res.json(habitInstance);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+    habitInstance.workDuration = value;
+    await habitInstance.save();
+    res.json(habitInstance);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.delete("/habitInstances/delete/:id", verifyToken, async (req, res) => {
-	try {
-		const habitInstance = await Instance.findById(req.params.id).exec();
-		if (habitInstance) {
-			const result = await habitInstance.deleteOne().exec();
-			if (result.deletedCount === 1) {
-				res.status(201).json({ message: "Instance successfully deleted" });
-			}
-		} else {
-			res.status(404).json({ message: "Couldn't find the instance" });
-		}
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
+  try {
+    const habitInstance = await Instance.findById(req.params.id).exec();
+    if (habitInstance) {
+      const result = await habitInstance.deleteOne().exec();
+      if (result.deletedCount === 1) {
+        res.status(201).json({ message: "Instance successfully deleted" });
+      }
+    } else {
+      res.status(404).json({ message: "Couldn't find the instance" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 module.exports = router;

@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/logout", (req, res) => {
-	req.session.destroy((err) => {
-		if (err) {
-			return res.status(500).send("Unable to log out");
-		}
+router.post("/logout", (_, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Lax",
+    path: "/",
+  });
 
-		res.clearCookie("connect.sid", { path: "/" });
-		res.clearCookie("token");
-		res.status(201).send("Logged out");
-	});
+  res.status(200).json({ message: "Logged out" });
 });
 
 module.exports = router;
