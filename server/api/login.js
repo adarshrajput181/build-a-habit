@@ -30,18 +30,21 @@ router.post("/login", async (req, res) => {
     };
 
     // make a jwt token for this sign up
+    const dayString = generateDayString(currentDay);
     const token = jwt.sign(
-      { id: storedUser._id },
-      "secret", // WARNING: too simple of a secret
+      { id: storedUser._id, lastAccess: dayString },
+      process.env.JWT_SECRET,
       { expiresIn: "8h" },
     );
 
-    // WARNING: these settings should be changed at deployment
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: isProduction,
       sameSite: "Lax",
       maxAge: 60 * 60 * 1000 * 8, // 8 hours
+      path: "/"
     });
 
     // logging in for the first time today
