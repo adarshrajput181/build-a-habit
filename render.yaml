@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: build-a-habit
+    runtime: node
+    rootDir: server
+    buildCommand: |
+      cd ../react && npm install && npm run build && cp -r dist ../server/dist
+      cd ../server && npm install
+    startCommand: node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: MONGODB_URL
+        sync: false
