@@ -1,5 +1,6 @@
 # Build a Habit
 A focused habit tracker for people who care about where their hours go. Create habits and track them effectively. Habits may be generated daily or on a weekly basis.
+**Check it out here: [build-a-habit-67cl.onrender.com](https://build-a-habit-67cl.onrender.com/)**
 
 ![Screenshot of Build-a-Habit](./docs/home.png)
 
