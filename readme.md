@@ -42,10 +42,8 @@ npm run dev
 ```
 2. Vite Frontend
 ```
-```
 cd react
 npm run dev
-```
 ```
 
 ## License
